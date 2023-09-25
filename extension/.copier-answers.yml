@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.2.1
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: support@cerit-sc.cz
+author_name: CERIT-SC
+data_format: string
+file_extension: ''
+has_binder: false
+has_settings: true
+kind: frontend
+labextension_name: jupyter-codegeex
+mimetype: ''
+mimetype_name: ''
+project_short_description: JupyterLab codegeex code autocompletion.
+python_name: jupyter_codegeex
+repository: ''
+test: false
+viewer_name: ''
+

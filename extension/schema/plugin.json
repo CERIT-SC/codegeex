@@ -1,0 +1,8 @@
+{
+  "jupyter.lab.shortcuts": [],
+  "title": "jupyter-codegeex",
+  "description": "jupyter-codegeex settings.",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}

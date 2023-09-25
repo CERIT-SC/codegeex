@@ -1,0 +1,8 @@
+transformers>=4.30.2
+accelerate
+cpm_kernels
+torch>=2.0
+sentencepiece
+fastapi
+uvicorn
+tabulate
