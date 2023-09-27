@@ -1,4 +1,5 @@
 from typing import List
+import tomllib
 from fastapi import FastAPI, Request
 from transformers import (
     AutoModel,
@@ -22,6 +23,9 @@ except:
         "Check out https://github.com/li-plus/chatglm.cpp for more details."
     )
     enable_chatglm_cpp = False
+
+with open("config.toml", "rb") as f:
+    config = tomllib.load(f)
 
 
 def add_code_generation_args(parser):

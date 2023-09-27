@@ -2,6 +2,7 @@ import { CodeEditor } from '@jupyterlab/codeeditor';
 
 import { CompletionHandler } from '@jupyterlab/completer';
 import { ICompletionContext, ICompletionProvider } from '@jupyterlab/completer';
+import config from '../config';
 
 export const CONTEXT_PROVIDER_ID = 'CompletionProvider:context';
 
@@ -52,7 +53,8 @@ namespace Private {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          ...(config.API_KEY && { Authorization: 'apikey ' + config.API_KEY })
         },
         body: JSON.stringify({
           prompt: textBeforeCursor,
