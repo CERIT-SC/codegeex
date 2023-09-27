@@ -6,3 +6,4 @@ sentencepiece
 fastapi
 uvicorn
 tabulate
+toml

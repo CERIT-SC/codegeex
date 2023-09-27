@@ -1,6 +1,5 @@
 from typing import List
-import tomllib
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request
 from transformers import (
     AutoModel,
     AutoTokenizer,
@@ -10,6 +9,7 @@ import argparse
 from utils import (
     is_code_generation_finished,
     cleanup_code,
+    verify_token
 )
 
 try:
@@ -24,9 +24,7 @@ except:
     )
     enable_chatglm_cpp = False
 
-with open("config.toml", "rb") as f:
-    config = tomllib.load(f)
-
+app = FastAPI()
 
 def add_code_generation_args(parser):
     group = parser.add_argument_group(title="CodeGeeX2 DEMO")
@@ -106,8 +104,6 @@ def sync_generate(self, input_ids: List[int], gen_config: _C.GenerationConfig) -
 
 chatglm_cpp.Pipeline._sync_generate = sync_generate
 
-app = FastAPI()
-
 
 def device():
     if enable_chatglm_cpp and args.chatglm_cpp:
@@ -141,7 +137,7 @@ def device():
 
 
 @app.post("/multilingual_code_generate_adapt")
-async def create_item(request: Request):
+async def create_item(request: Request, authorized: bool = Depends(verify_token)):
     global model, tokenizer
     json_post_raw = await request.json()
     json_post = json.dumps(json_post_raw)

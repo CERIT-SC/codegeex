@@ -3,8 +3,9 @@ import torch
 import numpy
 import random
 import logging
-
 from typing import *
+from fastapi import HTTPException, Request
+from config_loader import config
 
 
 def set_random_seed(seed):
@@ -164,6 +165,20 @@ def cleanup_code(
 
     return code
 
+def verify_token(req: Request):
+    if "Authorization" not in req.headers:
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized"
+        )
+
+    token = req.headers["Authorization"]
+    if token != "apikey " + config["api"]["API_KEY"]:
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized"
+        )
+    return True
 
 class Logger:
     def __init__(
